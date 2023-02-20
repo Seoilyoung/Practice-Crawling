@@ -1,26 +1,17 @@
-import requests as rq
 from bs4 import BeautifulSoup
-from selenium import webdriver
-import time
-# 파서 차이
-# # lxml        c언어 구현, c언어 의존적, xml처리 가능, html, body태그 구성
-# html5lib      파이썬 구현, 파이썬 의존적 아님, 웹브라우저 형태, html,head,body
-# html.parser   버전에 따라 실행 여부가 다름.(파이썬 2.7.2이하, 3.2.2 이하 버전에서만 사용 가능) 추천하지 않음 
-# 속도 : lxml > html.parser > html5lib
 
-html = """<html><head></head><p>test</p></html>"""
+html = """<html><head><title>test site</title></head> <body><p><span>test</span><span>test1</span><span>test2</span></p><p>test2</p><p>test3</p></body></html>"""
 
-startTime = time.time()
 soup = BeautifulSoup(html,'lxml')
-endTime = time.time() - startTime
 
+# tag_p = soup.p
+tag_p = soup.p.span.string
 
-startTime2 = time.time()
-soup2 = BeautifulSoup(html,'html5lib')
-endTime2 = time.time() - startTime2
+print(tag_p)
+print(type(soup), ',',type(tag_p))
 
-
-# driver = webdriver.Edge('msedgedriver.exe')
-
-print(endTime)
-print(endTime2)
+print(tag_p.text)
+print(type(tag_p.text))
+print(tag_p.string)
+print(type(tag_p.string))
+# 결과값은 같지만 다르다.
