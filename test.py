@@ -1,43 +1,29 @@
+from selenium import webdriver
 from bs4 import BeautifulSoup
+import tweepy
 
-html = """<html><head><title>test site</title></head> <body><p><span>test</span><span>test1</span><span>test2</span></p><p>test2</p><p>test3</p></body></html>"""
 
-soup = BeautifulSoup(html,'lxml')
 
-# tag_p_children = soup.p.contents
-# print(tag_p_children)
+# url = 'https://forum.nexon.com/bluearchive/'
+url2 = 'https://twitter.com/KR_BlueArchive/'
 
-# tag_p_children2 = soup.p.children
-# print(tag_p_children2)
-# for child in tag_p_children2:
-#     print(child)
-# # list iterator object 형태로 가져오므로 보려면 반복문 사용.
+driver = webdriver.Edge('msedgedriver.exe')
+# driver.get(url)
 
-# tag_span = soup.span
-# tag_title = soup.title
+# soup = BeautifulSoup(driver.page_source, 'lxml')
 
-# # span_parent = tag_span.parent
-# # title_parent = tag_title.parent
-# # print(tag_span)
-# # print(span_parent)
-# # print(tag_title)
-# # print(title_parent)
+# posts = soup.select('body div.main.main-type2 div.section-bot div.sticky-box a')
+# print('넥슨 주요소식')
+# print('----------------------------------------------------------------------')
+# for post in posts:
+#     category = post.find('span',class_= 'key-color').text.strip()
+#     title = post.find('h3').text.strip()
+#     icon = post.find('span',class_='icon-new')
+#     link = post.get('href')
+#     print(category,title,icon)
+#     print(url+link)
+# print('----------------------------------------------------------------------')
 
-# span_parents = tag_span.parents
-# title_parents = tag_title.parents
-# print(tag_span)
-# print(span_parents)
-# print(tag_title)
-# print(title_parents)
-# # children 과 비슷하지만 generator object로 가져온다. 반복문 사용. 최상위 태그까지 단계별로 모두 출력.
-
-# tag_span = soup.span
-
-# a = tag_span.next_sibling
-# b = a.previous_sibling
-
-# print(a)
-# print(b)
-# # sibling next, previous로 형제 태그 접근 가능. siblings쓰면 generator objects로 쭉 가져옴. 
-# # element를 사용하면 태그가 아니라 요소로 접근 가능.(요소 : 태그,자식태그,문자) elements도 사용 가능. 탐색 방식은 dfs
+driver.get(url2)
+soup = BeautifulSoup(driver.page_source, 'lxml')
 
